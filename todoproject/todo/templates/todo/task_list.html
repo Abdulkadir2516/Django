@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Listesi</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <a href="{% url 'task_create' %}">Yeni Görev Ekle</a>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.title }}</strong> - {{ task.description }} <br>
+                {% if task.completed %}
+                    <span style="color: green;">Tamamlandı</span>
+                {% else %}
+                    <a href="{% url 'task_complete' task.pk %}">Tamamla</a>
+                {% endif %}
+                <a href="{% url 'task_edit' task.pk %}">Düzenle</a>
+                <a href="{% url 'task_delete' task.pk %}">Sil</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
